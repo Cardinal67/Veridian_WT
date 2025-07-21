@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veridian Workout Tracker</title>
+    
+    <!--
+      NOTE: Environment variables are now handled by Vite.
+      Set VITE_GOOGLE_CLIENT_ID, VITE_API_KEY, and VITE_GEMINI_API_KEY
+      in a .env file or your hosting provider's settings (e.g., Vercel).
+    -->
+    
+    <!-- Include Tailwind CSS via CDN for rapid UI development -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configure Tailwind CSS directly in the browser -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': '#14F195',
+              'brand-secondary': '#00C2FF',
+              'brand-dark': '#1A1A1A',
+              'brand-light': '#F5F5F5',
+              'brand-muted': '#A3A3A3',
+              'brand-card': '#262626',
+              'brand-border': '#3A3A3A'
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom global CSS styles -->
+    <style>
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #1A1A1A; }
+      ::-webkit-scrollbar-thumb { background: #3A3A3A; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://esm.sh/recharts@^3.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.10.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^4.7.0",
+    "vite": "https://esm.sh/vite@^7.0.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
