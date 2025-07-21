@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Sets the character encoding for the document. UTF-8 is the standard and supports all characters. -->
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Defines the favicon for the website (the little icon in the browser tab). -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- This is crucial for responsive design. It tells the browser to set the width of the page to the device's screen width and sets the initial zoom level. -->
+
+    <title>Veridian Workout Tracker</title>
+    <!-- The title that appears in the browser tab and search engine results. -->
+    
+    <!--
+      ================================================================================
+      IMPORTANT: APPLICATION CONFIGURATION
+      This script block simulates server-side environment variables for the browser.
+      In a real-world production app, these keys would be managed by a build process
+      or an environment variable service, not hardcoded directly in the HTML.
+      For this project, this setup makes it easy to configure without a complex backend.
+      ================================================================================
+    -->
+    <script>
+      // We create a global `window.process` object to mimic Node.js environment variables.
+      // This allows the application code (e.g., in services/geminiService.ts) to access
+      // these keys using `process.env.YOUR_KEY_NAME`.
+      window.process = {
+        env: {
+          // --- Key 1: Google Client ID (for Sign-In) - PUBLIC ---
+          // PURPOSE: This ID identifies your application to Google for user authentication.
+          //          It is REQUIRED for the "Sign In with Google" button to work for any user.
+          // HOW TO GET: Create an "OAuth 2.0 Client ID" for a "Web application" in the Google Cloud Console.
+          //             https://console.cloud.google.com/apis/credentials
+          // NOTE: This is considered PUBLIC information. It is safe to expose in client-side code because
+          //       it's restricted to run only on the authorized domains you configure in your Google Cloud project.
+          GOOGLE_CLIENT_ID: '33845686905-5sc3maf9npllr2v4snpla7orhvupdscm.apps.googleusercontent.com',
+
+          // --- Key 2: Google Cloud Platform API Key (for Sync) - PRIVATE ---
+          // PURPOSE: This authorizes your application to make calls to Google APIs like Drive and Fit.
+          //          It is REQUIRED for "Cloud Sync" and "Google Fit" integration to work.
+          // HOW TO GET: Create an "API Key" in the Google Cloud Console. You must enable the
+          //             "Google Drive API" and "Fitness API" for this key.
+          // NOTE: This key is intended to be PRIVATE. In a real app, you would not expose this in the client.
+          //       It would typically be used on a server that your app communicates with. For simplicity in this
+          //       project, it's included here but should not be committed to a public repository if it were a real key.
+          API_KEY: 'YOUR_GCP_API_KEY_HERE',
+
+          // --- Key 3: Gemini API Key (for AI) - PRIVATE ---
+          // PURPOSE: This authorizes the application to make calls to the Google Gemini model for the AI Planner.
+          //          It is REQUIRED for the "AI Workout Planner" feature to work.
+          // HOW TO GET: Get a key from Google AI Studio. https://aistudio.google.com/app/apikey
+          // NOTE: This key should also be kept PRIVATE and handled securely, similar to the GCP API Key.
+          GEMINI_API_KEY: 'YOUR_GEMINI_API_KEY_HERE',
+        }
+      };
+    </script>
+    
+    <!-- Include Tailwind CSS via CDN for rapid UI development -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configure Tailwind CSS directly in the browser -->
+    <script>
+      tailwind.config = {
+        theme: {
+          // `extend` allows us to add new values without overwriting Tailwind's defaults.
+          extend: {
+            // Define a custom color palette for consistent branding throughout the app.
+            colors: {
+              'brand-primary': '#14F195',     // Bright green for primary actions and highlights.
+              'brand-secondary': '#00C2FF',   // Bright blue for secondary accents.
+              'brand-dark': '#1A1A1A',        // The main dark background color.
+              'brand-light': '#F5F5F5',       // Primary text color.
+              'brand-muted': '#A3A3A3',       // For less important text, subtitles, etc.
+              'brand-card': '#262626',        // Background color for cards and modals.
+              'brand-border': '#3A3A3A'       // Border color for cards and inputs.
+            },
+            // Define custom animations.
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite', // A slower, more subtle pulse effect.
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom global CSS styles -->
+    <style>
+      /* Simple scrollbar styling for a better, more integrated dark-mode look. */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #1A1A1A; } /* Matches the dark background */
+      ::-webkit-scrollbar-thumb { background: #3A3A3A; border-radius: 4px; } /* Matches the border color */
+      ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+
+  <!--
+    ================================================================================
+    ESM Import Map
+    This tells the browser how to resolve module specifiers like "react" or "recharts".
+    Instead of needing a build step (like Webpack or Vite) to handle node_modules,
+    the browser can directly fetch these packages from a CDN that provides ES Modules (ESM).
+    This is a modern, buildless approach to using packages in the browser.
+    ================================================================================
+  -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+      "recharts": "https://esm.sh/recharts@^3.1.0",
+      "react": "https://esm.sh/react@^19.1.0",
+      "react/": "https://esm.sh/react@^19.1.0/",
+      "@google/genai": "https://esm.sh/@google/genai@^1.10.0"
+    }
+  }
+  </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <!-- The root container for the React application. -->
+    <div id="root"></div>
+    
+    <!-- The main application script. `type="module"` is essential for using ES6 imports/exports. -->
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
